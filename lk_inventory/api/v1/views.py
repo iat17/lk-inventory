@@ -16,7 +16,7 @@ from lk_inventory.serializers.v1.response import User, Account, PagingAccount, P
 base_routes = APISlashRouter()
 
 
-@base_routes.post('/users', response_model=User)
+@base_routes.post('/users', status_code=HTTP_201_CREATED, response_model=User)
 async def create_user_view(user: UserRegistrationRequest, session: AsyncSession = Depends(get_session)):
     return await create_user(user, session)
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -47,7 +47,7 @@ class ServiceAccountLink(BaseModel):
 
 class Account(BaseModel):
     id: int = Field(gt=0, description='Идентификатор аккаунта')
-    user_id: int = Field(gt=0, description='Идентификатор пользователя')
+    user_id: Optional[int] = Field(gt=0, description='Идентификатор пользователя')
     balance: int = Field(description='Баланс')
     services: List[ServiceAccountLink] = Field(description='Подключенные услуги')
 
