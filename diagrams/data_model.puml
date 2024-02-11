@@ -1,3 +1,50 @@
 @startuml
+entity User{
+  *id : BigInteger <<PK>>
+  *user_id : text unique
+  *password: text
+  *phone: text unique
+  *email: text
+  *name: text
+  *last_name: text
+  created_at: datetime
+  updated_at: datetime
+}
+
+entity Account{
+  *id : BigInteger <<PK>>
+  *user_id : BigInteger <<FK>>
+  *created_at: datetime
+}
+
+entity Service{
+  *id : BigInteger <<PK>>
+  *name : String(255)
+  *description : text
+  created_at: datetime
+}
+
+entity ServiceAccountLink{
+  *id : BigInteger <<PK>>
+  *service_id: BigInteger <<FK>>
+  *account_id: BigInteger <<FK>>
+  *plan_id: BigInteger <<FK>>
+  *updated_at: datetime
+  *created_at: datetime
+}
+
+entity Plan{
+  *id : BigInteger <<PK>>
+  *name : String
+  *price: Integer
+  *service_id: BigInteger <<FK>>
+  *created_at: datetime
+}
+
+Account  ||--|| User
+ServiceAccountLink }|..|| Service
+ServiceAccountLink }|..|| Account
+ServiceAccountLink }|..|| Plan
+Plan ||..|| Service
 
 @enduml
