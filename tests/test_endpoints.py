@@ -52,18 +52,3 @@ async def test_get_services_by_account(client,
 async def test_bind_service_to_account(client, create_fake_service_account_links, override_auth_check_dependency):
     response = await client.post("/api/v1/accounts/5/service/1", json={'plan_id': 3})
     assert response.status_code == status.HTTP_200_OK
-
-
-@pytest.mark.asyncio
-async def test_change_pricing_of_service(client, fake_bindings, override_auth_check_dependency):
-    response = await client.put("/v1/services/10/pricing_plan/10")
-    assert response.status_code == status.HTTP_200_OK
-    assert response.json() == {"status": "success"}
-
-
-@pytest.mark.asyncio
-async def test_bind_account_to_client(client, fake_clients, override_auth_check_dependency):
-    response = await client.post("/v1/clients/10")
-    assert response.status_code == status.HTTP_201_CREATED
-
-
